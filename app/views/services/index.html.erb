@@ -1,14 +1,12 @@
-<% title 'Services' %>
-
 <p id="notice"><%= notice %></p>
 
-<h1>Services</h1>
+<h1>Manage services</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Title</th>
       <th>Slug</th>
+      <th>Title</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,8 +14,8 @@
   <tbody>
     <% @services.each do |service| %>
       <tr>
+        <td><%= link_to service.slug, service_by_slug_path(service.slug) %></td>
         <td><%= service.title %></td>
-        <td><%= service.slug %></td>
         <td><%= link_to 'Show', service %></td>
         <td><%= link_to 'Edit', edit_service_path(service) %></td>
         <td><%= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' } %></td>

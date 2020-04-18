@@ -1,0 +1,9 @@
+<% title 'Services' %>
+
+<h1>Services</h1>
+
+<ul>
+  <% @services.each do |service| %>
+    <li><%= link_to service.title, service_by_slug_path(service.slug) %></li>
+  <% end %>
+</ul>

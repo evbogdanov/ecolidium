@@ -1,28 +1,51 @@
 class ServicesController < ApplicationController
   before_action :set_service, only: [:show, :edit, :update, :destroy]
 
+  ##############################################################################
+  ### My custom controllers for regular users
+  ##############################################################################
+
   # GET /services
-  # GET /services.json
+  def show_all
+    @services = Service.all
+  end
+
+  # GET /services/some-slug
+  def show_by_slug
+    @service = Service.find_by(slug: params[:slug])
+
+    if @service.nil?
+      render :show_not_found, status: :not_found
+    end
+  end
+
+
+  ##############################################################################
+  ### Auto-generated controllers for admin
+  ##############################################################################
+
+  # GET /admin/services
+  # GET /admin/services.json
   def index
     @services = Service.all
   end
 
-  # GET /services/1
-  # GET /services/1.json
+  # GET /admin/services/1
+  # GET /admin/services/1.json
   def show
   end
 
-  # GET /services/new
+  # GET /admin/services/new
   def new
     @service = Service.new
   end
 
-  # GET /services/1/edit
+  # GET /admin/services/1/edit
   def edit
   end
 
-  # POST /services
-  # POST /services.json
+  # POST /admin/services
+  # POST /admin/services.json
   def create
     @service = Service.new(service_params)
 
@@ -37,8 +60,8 @@ class ServicesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /services/1
-  # PATCH/PUT /services/1.json
+  # PATCH/PUT /admin/services/1
+  # PATCH/PUT /admin/services/1.json
   def update
     respond_to do |format|
       if @service.update(service_params)
@@ -51,8 +74,8 @@ class ServicesController < ApplicationController
     end
   end
 
-  # DELETE /services/1
-  # DELETE /services/1.json
+  # DELETE /admin/services/1
+  # DELETE /admin/services/1.json
   def destroy
     @service.destroy
     respond_to do |format|
@@ -61,14 +84,20 @@ class ServicesController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_service
-      @service = Service.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def service_params
-      params.require(:service).permit(:title, :slug)
-    end
+  ##############################################################################
+  ### Private methods
+  ##############################################################################
+
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_service
+    @service = Service.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def service_params
+    params.require(:service).permit(:title, :slug)
+  end
 end
