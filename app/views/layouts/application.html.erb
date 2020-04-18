@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Ecolidium</title>
+    <title><%= if content_for?(:title) then yield(:title) + ' | ' else '' end %>Ecolidium</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
