@@ -5,7 +5,7 @@
 First thing I have to install is [rbenv](https://github.com/rbenv/rbenv). It manages Ruby versions.
 
 ```
-brew install rbenv 
+brew install rbenv
 ```
 
 Setting it up is easy. Just follow the guide on GitHub.
